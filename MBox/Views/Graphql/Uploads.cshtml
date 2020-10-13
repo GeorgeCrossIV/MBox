@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Upload>
+
+@{
+    ViewData["Title"] = "Uploads";
+}
+
+<h1>Users</h1>
+
+@(Html.Grid(Model)
+  .Build(columns =>
+  {
+      columns.Add(model => model.id).Titled("id");
+      columns.Add(model => model.filename).Titled("filename");
+      columns.Add(model => model.ip).Titled("ip");
+      columns.Add(model => model.userid).Titled("User Id");
+
+  })
+  .Using(GridFilterMode.Header)
+  .Empty("No data found")
+  .Filterable()
+  .Sortable()
+  .Pageable()
+    )
+

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MBox.Models
 {
 
-    public class UserRootobject
+    public class UserRootObject
     {
         public UserData data { get; set; }
     }

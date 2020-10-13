@@ -29,6 +29,19 @@ namespace MBox.Controllers
             return View(Services.Astra.GetUsers(_config, GetToken()));
         }
 
+        public IActionResult Tags()
+        {
+            return View(Services.Astra.GetTags(_config, GetToken()));
+        }
+        public IActionResult Uploads()
+        {
+            return View(Services.Astra.GetUploads(_config, GetToken()));
+        }
+        public IActionResult ApacheLogs()
+        {
+            return View(Services.Astra.GetApacheLogs(_config, GetToken()));
+        }
+
         private string GetToken()
         {
             if (_Token.Length == 0)

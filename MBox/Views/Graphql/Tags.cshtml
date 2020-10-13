@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Tag>
+
+@{
+    ViewData["Title"] = "Tag";
+}
+
+<h1>Tags</h1>
+
+@(Html.Grid(Model)
+  .Build(columns =>
+  {
+      columns.Add(model => model.id).Titled("id");
+      columns.Add(model => model.image).Titled("image");
+
+  })
+  .Using(GridFilterMode.Header)
+  .Empty("No data found")
+  .Filterable()
+  .Sortable()
+  .Pageable()
+    )
+

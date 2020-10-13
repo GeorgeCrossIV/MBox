@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ApacheLog>
+
+@{
+    ViewData["Title"] = "Apache Logs";
+}
+
+<h1>Apache Logs</h1>
+
+@(Html.Grid(Model)
+  .Build(columns =>
+  {
+      columns.Add(model => model.logId).Titled("Log Id");
+      columns.Add(model => model.accessUrl).Titled("access Url");
+      columns.Add(model => model.ip).Titled("ip");
+
+  })
+  .Using(GridFilterMode.Header)
+  .Empty("No data found")
+  .Filterable()
+  .Sortable()
+  .Pageable()
+    )
+

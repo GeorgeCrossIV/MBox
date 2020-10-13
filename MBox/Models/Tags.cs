@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace MBox.Models
 {
 
-    public class TagRootobject
+    public class TagRootObject
     {
         public TagData data { get; set; }
     }
