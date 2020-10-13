@@ -1,0 +1,3 @@
+./dsbulk-1.7.0/bin/dsbulk load -delim ';' -url users2.txt -k mbox -t users -b secure-connect-mbox.zip -u mbox -p mbox2020 -header false -m "id,ip,sessionid,email,password,last_active,usertype,confirmed"
+./dsbulk-1.7.0/bin/dsbulk load -delim ';' -url uploads2.txt -k mbox -t uploads -b secure-connect-mbox.zip -u mbox -p mbox2020 -header false -m "id, userid, sessionid, filename, filesize, mime, ip, tags, html, deleted, timestamp"
+./dsbulk-1.7.0/bin/dsbulk load -delim ';' -url tags2.txt -k mbox -t tags -b secure-connect-mbox.zip -u mbox -p mbox2020 -header false -m "id,uploadid,image,title,artist,band,album,year,sample_rate,bitrate,bpm,genre,playtime_seconds,playtime_string"
