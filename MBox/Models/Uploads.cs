@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,7 @@ namespace MBox.Models
 
     public class Upload
     {
+        [Key]
         public int id { get; set; }
         public string filename { get; set; }
         public string ip { get; set; }

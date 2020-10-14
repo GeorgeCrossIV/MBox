@@ -2,9 +2,13 @@
 
 @{
     ViewData["Title"] = "Uploads";
+
 }
 
-<h1>Users</h1>
+<h1>Uploads</h1>
+@if (ViewBag.Filter.Length > 0) {
+    <h2>@ViewBag.Filter</h2>
+} 
 
 @(Html.Grid(Model)
   .Build(columns =>
@@ -13,6 +17,7 @@
       columns.Add(model => model.filename).Titled("filename");
       columns.Add(model => model.ip).Titled("ip");
       columns.Add(model => model.userid).Titled("User Id");
+    columns.Add(item => @Html.ActionLink("Tags by UploadId", "TagsByUploadId", "Graphql", new { id=item.id })).Titled("Actions");
 
   })
   .Using(GridFilterMode.Header)
@@ -21,4 +26,5 @@
   .Sortable()
   .Pageable()
     )
+
 

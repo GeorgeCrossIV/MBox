@@ -31,12 +31,25 @@ namespace MBox.Controllers
 
         public IActionResult Tags()
         {
+            ViewBag.Filter = "";
             return View(Services.Astra.GetTags(_config, GetToken()));
         }
         public IActionResult Uploads()
         {
+            ViewBag.Filter = "";
             return View(Services.Astra.GetUploads(_config, GetToken()));
         }
+        public IActionResult UploadsByUserId(string id)
+        {
+            ViewBag.Filter = string.Format("Uploads by UserId: {0}", id);
+            return View("Uploads", Services.Astra.GetUploadsByUserId(_config, GetToken(), id));
+        }
+        public IActionResult TagsByUploadId(string id)
+        {
+            ViewBag.Filter = string.Format("Tags by UploadId: {0}", id);
+            return View("Tags",Services.Astra.GetTagsByUploadId(_config, GetToken(), id));
+        }
+
         public IActionResult ApacheLogs()
         {
             return View(Services.Astra.GetApacheLogs(_config, GetToken()));

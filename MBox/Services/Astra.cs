@@ -117,6 +117,64 @@ namespace MBox.Services
 
             return data.data.uploads.values.ToList();
         }
+        public static List<Tag> GetTagsByUploadId(IConfiguration config, string token, string uploadId)
+        {
+            TagsByUploadIdRootObject data = new TagsByUploadIdRootObject();
+            string graphQLQuery = "{\"query\":\"query {    uploads(value: { id: " + uploadId + " }) {        values {            id             filename             ip             userid        }    }    tags(value: { uploadid: " + uploadId + "}) {        values {            title            album            artist            image        }    }}\" }";
+
+            var baseUrl = config.GetSection("Astra").GetSection("BaseUrl").Value;
+            var keyspace = config.GetSection("Astra").GetSection("Keyspace").Value;
+            var url = string.Format("{0}{1}",
+                baseUrl, keyspace);
+
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("X-Cassandra-Token", token);
+            request.AddParameter("application/json", graphQLQuery, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            data = JsonConvert.DeserializeObject<TagsByUploadIdRootObject>(response.Content);
+
+            Console.WriteLine("retrieved Tags: ");
+
+            // send empty Upload list if value is null
+            if (data.data.tags == null)
+            {
+                data.data.tags = new Tags();
+                data.data.tags.values = new Tag[0];
+            }
+
+            return data.data.tags.values.ToList();
+        }
+        public static List<Upload> GetUploadsByUserId(IConfiguration config, string token, string userId)
+        {
+            UploadsByUserIdRootObject data = new UploadsByUserIdRootObject();
+            string graphQLQuery = "{\"query\":\"query {    users(value: { id: " + userId + "}) {        values {            ip            email            lastActive        }    }    uploads(value: { userid: " + userId + " }) {        values {            id             filename             ip             userid        }    }}\"}";
+
+            var baseUrl = config.GetSection("Astra").GetSection("BaseUrl").Value;
+            var keyspace = config.GetSection("Astra").GetSection("Keyspace").Value;
+            var url = string.Format("{0}{1}",
+                baseUrl, keyspace);
+
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("X-Cassandra-Token", token);
+            request.AddParameter("application/json", graphQLQuery, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            data = JsonConvert.DeserializeObject<UploadsByUserIdRootObject>(response.Content);
+
+            Console.WriteLine("retrieved Uploads: ");
+
+            // send empty Upload list if value is null
+            if (data.data.uploads == null)
+            {
+                data.data.uploads = new Uploads();
+                data.data.uploads.values = new Upload[0];
+            }
+
+            return data.data.uploads.values.ToList();
+        }
 
     }
 }

@@ -12,6 +12,7 @@
       columns.Add(model => model.id).Titled("id");
       columns.Add(model => model.email).Titled("email");
       columns.Add(model => model.ip).Titled("ip");
+    columns.Add(item => @Html.ActionLink("Uploads By UserId", "UploadsByUserId", "Graphql", new { id=item.id })).Titled("Actions");
 
   })
   .Using(GridFilterMode.Header)
