@@ -1,7 +1,7 @@
 # Stargate Hackathon 
 <b><i>Working with GraphQL Api on Astra with Stargate enabled.</i></b>
 
-###Use Case
+# Use Case
 - LAMP (php/mysql/apache/centos) application with 3 tables (users,uploads,tags)
 - Apache Log processing with NIFI
 - Astra with Stargate
